@@ -15,8 +15,7 @@ export const updateUser = async (req, res, next) => {
     }
     try {
         if (req.body.password) {
-            req.body.password = bcyrptjs.hashSync(req.body.passsword, 10)
-            console.log(req.body.password);
+            req.body.password = bcyrptjs.hashSync(req.body.password, 10)
         }
 
         const updatedUser = await User.findByIdAndUpdate(req.params.id, {
@@ -31,6 +30,7 @@ export const updateUser = async (req, res, next) => {
         const { password, ...rest } = updatedUser._doc
         res.status(200).json(updatedUser)
     } catch (error) {
+        console.log(error);
         next(error)
     }
 }
